@@ -89,3 +89,63 @@ Run cron job (scheduler)
 ```bash
 npx tsx src/scheduler.ts
 ```
+
+## 📚 API Endpoints
+
+### 🔐 Authentication
+
+| Method | Endpoint        | Description         |
+|--------|-----------------|---------------------|
+| POST   | `/api/register` | Register a new user |
+| POST   | `/api/login`    | Login and get token |
+
+---
+
+### 📦 Products
+
+| Method | Endpoint        | Description        |
+|--------|------------------|--------------------|
+| POST   | `/api/products` | Create a product   |
+
+**Sample Payload**:
+```json
+{
+  "name": "Produk Baru",
+  "price": 4000,
+  "expired_date": "2025-07-12"
+}
+```
+---
+
+### 📅 Public Holidays
+this 
+| Method | Endpoint                       | Description             |
+|--------|--------------------------------|-------------------------|
+| GET    | `/api/public-holidays`         | Fetch public holidays   |
+
+---
+
+### 🧾 Orders
+
+| Method | Endpoint      | Description        |
+| ------ | ------------- | ------------------ |
+| POST   | `/api/orders` | Create a new order |
+**Sample Payload**:
+```json
+{
+  "orderBy": 1,
+  "orderDate": "2025-05-09",
+  "items": [
+    { "productId": 9, "quantity": 2 },
+    { "productId": 8, "quantity": 3 }
+  ]
+}
+```
+---
+
+### 🏆 Reports
+
+| Method | Endpoint             | Description                     |
+|--------|----------------------|---------------------------------|
+| GET    | `/api/top-customers` | Get top 10 customers this month |
+
