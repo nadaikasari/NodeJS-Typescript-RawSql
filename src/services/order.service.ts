@@ -39,15 +39,12 @@ export const createOrderService = async (address: string, payment_type: string, 
         const created = await createTransaction(address, payment_type, orderNumber);
 
         for (const item of items) {
-            const inserted = await createTransactionProduct(created.id, item);
-            if (inserted !== 1) {
-                throw new Error('Failed to insert transaction product');
-            }
+            await createTransactionProduct(created.id, item);
         }
 
         await commitTransaction();
 
-        return createResponse(HttpStatus.CREATED, true, 'Order created successfully', items);
+        return createResponse(HttpStatus.CREATED, true, 'Order created successfully', created);
         
     } catch (err) {
         await rollbackTransaction();

@@ -42,11 +42,11 @@ export const createTransactionProduct = async (
     item: OrderItem
   ) => {
     const result = await client.query(
-      `INSERT INTO transaction_product (transaction_id, id_product, price, quantity)
+      `INSERT INTO transaction_products (transaction_id, id_product, price, quantity)
        VALUES ($1, $2, $3, $4)`,
       [transactionId, item.id_product, item.price, item.quantity]
     );
-    return result.rowCount;
+    return item;
 };
   
   
