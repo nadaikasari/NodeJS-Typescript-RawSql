@@ -46,7 +46,7 @@ export const createTransactionProduct = async (
        VALUES ($1, $2, $3, $4)`,
       [transactionId, item.id_product, item.price, item.quantity]
     );
-    return item;
+    return result.rowCount;
 };
   
   
