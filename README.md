@@ -79,6 +79,24 @@ CREATE TABLE order_details (
   sub_total NUMERIC(12, 2) NOT NULL
 );
 
+--transaction table from live test
+CREATE TABLE transactions (
+    id SERIAL PRIMARY KEY,
+    address TEXT NOT NULL,
+    order_code TEXT NOT NULL UNIQUE,
+    payment_type VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+--transaction product table from live test
+CREATE TABLE transaction_products (
+    id SERIAL PRIMARY KEY,
+    transaction_id INT NOT NULL REFERENCES transactions(id) ON DELETE CASCADE,
+    id_product INT NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
+    price INT NOT NULL,
+    quantity INT NOT NULL
+);
+
 ```
 ## How to Run
 Start the main Node server
