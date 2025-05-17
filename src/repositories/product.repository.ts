@@ -47,3 +47,31 @@ export const updateExpiredProducts = async (): Promise<void> => {
         console.error('Error updating expired products:', error);
     }
 };
+
+export const updateProduct = async (
+    id: number,
+    name: string,
+    price: number,
+    expired_date: string
+) => {
+    const result = await client.query(
+      'UPDATE products SET product_name = $1, price = $2, expired_date = $3 WHERE product_id = $4 RETURNING *',
+      [name, price, expired_date, id]
+    );
+    return result.rows[0] ?? null;
+};
+  
+export const deleteProduct = async (id: number) => {
+    const result = await client.query(
+      'DELETE FROM products WHERE product_id = $1 RETURNING *',
+      [id]
+    );
+    return result.rows[0];
+};
+
+export const getAllProduct = async () => {
+    const result = await client.query('SELECT * FROM products ORDER BY product_id ASC');
+
+    return result.rows;
+};
+  
